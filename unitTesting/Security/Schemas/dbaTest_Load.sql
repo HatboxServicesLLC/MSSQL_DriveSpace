@@ -1,0 +1,3 @@
+CREATE SCHEMA [dbaTest_Load]
+AUTHORIZATION [dbo]
+GO
