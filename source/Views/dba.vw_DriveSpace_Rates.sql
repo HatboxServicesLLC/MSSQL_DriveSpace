@@ -3,38 +3,8 @@ GO
 SET ANSI_NULLS ON
 GO
 
-/*****************************************************************************************************************************************************
-Name: dba.vw_DriveSpace_Rates
-Creation Date: 03.11.2024
-Author: CPearson
 
-Description:Takes the DriveSpaceHistory table and builds rates off the data for drive usage over seconds, minutes and hours.  
-
-
-Version Naming Conventions
---------------------------------------
-1.2
-^ ^
-| |
-| +----- Version Minor: features, major bug fixes, etc.
-+------- Version Major: syntax changes, join logic, table adds / removal changes, etc.
-
-Revision History:
------------------------
-Revision Date | Revision Developer | Version Major | Version Minor  | Ticket 			| Revision Notes
-------------------------------------------------------------------------------------------------------------------------
-03.11.2024 CPearson        1                      0     			DO-2713		Initial stored procedure
-
- 
-
- 
-
-Test Case:
--------------
-- **this section should include detailed instructions of how to test the intended functionality of this stored procedure**
-
-******************************************************************************************************************************************************/
-CREATE    VIEW [dba].[vw_DriveSpace_Rates]
+CREATE OR ALTER VIEW [dba].[vw_DriveSpace_Rates]
 AS
 WITH temp
 AS (
@@ -121,3 +91,7 @@ SELECT arg02.id,
        arg02.Change_GBaHour
 FROM arg02;
 GO
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'VIEW', @level1name = N'vw_DriveSpace_Rates';
