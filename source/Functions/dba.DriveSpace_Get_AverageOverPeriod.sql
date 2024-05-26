@@ -3,42 +3,16 @@ GO
 SET ANSI_NULLS ON
 GO
 
-
-/*****************************************************************************************************************************************************
-Name: dba.DriveSpace_Get_AverageOverPeriod
-Creation Date: 03.12.2024
-Author: CPearson
-
-Description:Get the average rate of use for given drives, over given period. 
-
-
-Version Naming Conventions
---------------------------------------
-1.2
-^ ^
-| |
-| +----- Version Minor: features, major bug fixes, etc.
-+------- Version Major: syntax changes, join logic, table adds / removal changes, etc.
-
-Revision History:
------------------------
-Revision Date | Revision Developer | Version Major | Version Minor  | Ticket 			| Revision Notes
-------------------------------------------------------------------------------------------------------------------------
-03.12.2024 CPearson        1                      0     			DO-2713		Initial stored procedure
-
-Test Case:
--------------
-- **this section should include detailed instructions of how to test the intended functionality of this stored procedure**
-
-******************************************************************************************************************************************************/
-CREATE FUNCTION [dba].[DriveSpace_Get_AverageOverPeriod]
+
+CREATE OR ALTER FUNCTION [dba].[DriveSpace_Get_AverageOverPeriod]
 (
     /*---------------------------------------
     --External Variable Declaration
     ---------------------------------------*/
     @StartDate DATETIME,
     @EndDate DATETIME,
-    @DriveLetters NVARCHAR(125) NULL
+    @DriveLetters NVARCHAR(125) NULL,
+	  @Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
 /*---------------------------------------
 ---------------------------------------*/
 )
