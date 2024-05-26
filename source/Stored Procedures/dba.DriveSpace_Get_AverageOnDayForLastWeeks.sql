@@ -2,41 +2,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-/*****************************************************************************************************************************************************
-Name: dba.DriveSpace_Get_AverageOnDayForLastWeeks
-Creation Date: 03.12.2024
-Author: CPearson
 
-Description:Get the average rate of use for given drives, over on given date, and the prior x weeks for that day. 
-
-
-Version Naming Conventions
---------------------------------------
-1.2
-^ ^
-| |
-| +----- Version Minor: features, major bug fixes, etc.
-+------- Version Major: syntax changes, join logic, table adds / removal changes, etc.
-
-Revision History:
------------------------
-Revision Date | Revision Developer | Version Major | Version Minor  | Ticket 			| Revision Notes
-------------------------------------------------------------------------------------------------------------------------
-03.12.2024 CPearson        1                      0     			DO-2713		Initial stored procedure
-
-Test Case:
--------------
-- **this section should include detailed instructions of how to test the intended functionality of this stored procedure**
-
-******************************************************************************************************************************************************/
-CREATE   procedure [dba].[DriveSpace_Get_AverageOnDayForLastWeeks] 
+CREATE  OR ALTER procedure [dba].[DriveSpace_Get_AverageOnDayForLastWeeks] 
 (
 /*---------------------------------------
 --External Variable Declaration
 ---------------------------------------*/
 @Date DATETIME,
 @NumWeeksBack TINYINT,
-@DriveLetters nvarchar(125) NULL
+@DriveLetters nvarchar(125) NULL,
+@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
 /*---------------------------------------
 ---------------------------------------*/
 )
