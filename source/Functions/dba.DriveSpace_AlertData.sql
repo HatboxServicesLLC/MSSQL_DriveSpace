@@ -2,39 +2,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-/*****************************************************************************************************************************************************
-Name: dba.DriveSpace_AlertData
-Creation Date: 03.23.2024
-Author: CPearson
 
-Description:Based off the an alert configuration, determine the data that should be used to determine if an alert should go out. 
-
-Version Naming Conventions
---------------------------------------
-1.2
-^ ^
-| |
-| +----- Version Minor: features, major bug fixes, etc.
-+------- Version Major: syntax changes, join logic, table adds / removal changes, etc.
-
-Revision History:
------------------------
-Revision Date | Revision Developer | Version Major | Version Minor  | Ticket 			| Revision Notes
-------------------------------------------------------------------------------------------------------------------------
-03.23.2024 CPearson        1                      0     			DO-2713		Initial stored procedure
-
-Test Case:
--------------
-- **this section should include detailed instructions of how to test the intended functionality of this stored procedure**
-
-******************************************************************************************************************************************************/
-CREATE   FUNCTION [dba].[DriveSpace_AlertData] 
+CREATE OR ALTER  FUNCTION [dba].[DriveSpace_AlertData]
 (
 /*---------------------------------------
 --External Variable Declaration
 ---------------------------------------*/
 	@EndDate DATETIME = NULL,
-	@DriveLetters NVARCHAR(500) = NULL
+	@DriveLetters NVARCHAR(500) = NULL,
+	@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
 /*---------------------------------------
 ---------------------------------------*/
 )
@@ -70,8 +46,7 @@ BEGIN
 	--Internal Variable Declaration
 	--------------------------------------*/
 	 
-	
-	/*-- << begin code logic >> --*/
+	
 		DECLARE @Estimations TABLE 
 		(
 		    [RateBaseOn] VARCHAR(11),
