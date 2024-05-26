@@ -20,3 +20,8 @@ FROM
 ) AS RecentRecord
 WHERE RecentRecord.MostRecent = 1;
 GO
+
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'TABLE', @level1name = N'vw_DriveSpace_MostRecent',
