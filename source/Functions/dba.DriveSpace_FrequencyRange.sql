@@ -2,41 +2,17 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-/*****************************************************************************************************************************************************
-Name: dba.DriveSpace_FrequencyRange
-Creation Date: 03.25.2024
-Author: CPearson
-
-Description:for given frequency and date, determine start and end range . 
 
 
-Version Naming Conventions
---------------------------------------
-1.2
-^ ^
-| |
-| +----- Version Minor: features, major bug fixes, etc.
-+------- Version Major: syntax changes, join logic, table adds / removal changes, etc.
-
-Revision History:
------------------------
-Revision Date | Revision Developer | Version Major | Version Minor  | Ticket 			| Revision Notes
-------------------------------------------------------------------------------------------------------------------------
-03.25.2024 CPearson        1                      0     			DO-2713		Initial stored procedure
-
-Test Case:
--------------
-- **this section should include detailed instructions of how to test the intended functionality of this stored procedure**
-
-******************************************************************************************************************************************************/
-CREATE function [dba].[DriveSpace_FrequencyRange] 
+CREATE OR ALTER function [dba].[DriveSpace_FrequencyRange] 
 (
 /*---------------------------------------
 --External Variable Declaration
 ---------------------------------------*/
 	@Frequency_Value int, 
 	@Frequency_TimePart nvarchar(10),
-	@GivenDate datetime
+	@GivenDate datetime,
+	@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
 
 /*---------------------------------------
 ---------------------------------------*/
