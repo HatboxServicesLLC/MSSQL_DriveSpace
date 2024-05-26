@@ -2,45 +2,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_NULLS ON
 GO
-/*****************************************************************************************************************************************************
-Name: dba.DriveSpace_Alerting
-Creation Date: 03.25.2024
-Author: CPearson
 
-Description:snd Drive space alers 
-
-
-Version Naming Conventions
---------------------------------------
-1.2
-^ ^
-| |
-| +----- Version Minor: features, major bug fixes, etc.
-+------- Version Major: syntax changes, join logic, table adds / removal changes, etc.
-
-Revision History:
------------------------
-Revision Date | Revision Developer | Version Major | Version Minor  | Ticket 			| Revision Notes
-------------------------------------------------------------------------------------------------------------------------
-03.25.2024 CPearson        1                      0     			DO-2713		Initial stored procedure
-
- 
-
- 
-
-Test Case:
--------------
-- **this section should include detailed instructions of how to test the intended functionality of this stored procedure**
-
-******************************************************************************************************************************************************/
-CREATE   PROCEDURE [dba].[DriveSpace_Alerting]
+CREATE OR ALTER PROCEDURE [dba].[DriveSpace_Alerting]
 (
     /*---------------------------------------
     --External Variable Declaration
     ---------------------------------------*/
     @JobName sysname = NULL,
-    @EmailTo NVARCHAR(100) = 'DBA_ITLowAlert@payspan.com;',
-    @EmailFromProfile NVARCHAR(20) = 'DBA_IT'
+    @EmailTo NVARCHAR(100) = ';',
+    @EmailFromProfile NVARCHAR(20) = '',
+		@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
 
 /*---------------------------------------
 ---------------------------------------*/
