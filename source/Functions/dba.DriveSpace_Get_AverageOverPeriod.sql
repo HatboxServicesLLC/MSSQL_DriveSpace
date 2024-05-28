@@ -3,7 +3,8 @@ GO
 SET ANSI_NULLS ON
 GO
 
-
+
+
 CREATE OR ALTER FUNCTION [dba].[DriveSpace_Get_AverageOverPeriod]
 (
     /*---------------------------------------
@@ -11,8 +12,7 @@ CREATE OR ALTER FUNCTION [dba].[DriveSpace_Get_AverageOverPeriod]
     ---------------------------------------*/
     @StartDate DATETIME,
     @EndDate DATETIME,
-    @DriveLetters NVARCHAR(125) NULL,
-	  @Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
+    @DriveLetters NVARCHAR(125) NULL
 /*---------------------------------------
 ---------------------------------------*/
 )
@@ -51,4 +51,11 @@ RETURN
 --v.DriveTotalSpace_GB,
 --,CONVERT(DATE,v.CapturedDateTime)
 );
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'FUNCTION', @level1name = N'DriveSpace_Get_AverageOverPeriod';
 GO

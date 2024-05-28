@@ -438,3 +438,11 @@ BEGIN
     END CATCH;
 END;
 GO
+
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'PROCEDURE', @level1name = N'DriveSpace_Alerting';
+GO

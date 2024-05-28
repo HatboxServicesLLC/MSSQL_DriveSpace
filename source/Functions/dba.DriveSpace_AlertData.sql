@@ -9,8 +9,7 @@ CREATE OR ALTER  FUNCTION [dba].[DriveSpace_AlertData]
 --External Variable Declaration
 ---------------------------------------*/
 	@EndDate DATETIME = NULL,
-	@DriveLetters NVARCHAR(500) = NULL,
-	@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
+	@DriveLetters NVARCHAR(500) = NULL
 /*---------------------------------------
 ---------------------------------------*/
 )
@@ -46,7 +45,8 @@ BEGIN
 	--Internal Variable Declaration
 	--------------------------------------*/
 	 
-	
+	
+
 		DECLARE @Estimations TABLE 
 		(
 		    [RateBaseOn] VARCHAR(11),
@@ -109,4 +109,11 @@ BEGIN
 		           );
 		RETURN;
 END
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'FUNCTION', @level1name = N'DriveSpace_AlertData';
 GO

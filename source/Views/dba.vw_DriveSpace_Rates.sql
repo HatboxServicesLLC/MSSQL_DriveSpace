@@ -91,7 +91,10 @@ SELECT arg02.id,
        arg02.Change_GBaHour
 FROM arg02;
 GO
+
+/*VERSION*/
 EXEC sp_addextendedproperty @name = N'VERSION',
     @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
     @level0type = 'SCHEMA', @level0name = N'dba',
     @level1type = 'VIEW', @level1name = N'vw_DriveSpace_Rates';
+GO

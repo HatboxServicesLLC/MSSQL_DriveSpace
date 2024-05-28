@@ -9,9 +9,10 @@ CREATE TABLE [dba].[DriveSpaceHistory]
 [CapturedDateTime] [datetime] NULL
 ) ON [PRIMARY]
 GO
-DECLARE @xp bit
-SELECT @xp=1
-EXEC sp_addextendedproperty N'tSQLt.IsTempObject', @xp, 'SCHEMA', N'dba', 'TABLE', N'DriveSpaceHistory', NULL, NULL
-GO
-EXEC sp_addextendedproperty N'tSQLt.Private_TestDouble_OrgObjectName', N'tSQLt_tempobject_db2c155867e6464db8871d73a6038c14', 'SCHEMA', N'dba', 'TABLE', N'DriveSpaceHistory', NULL, NULL
+
+
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'TABLE', @level1name = N'DriveSpaceHistory';
 GO

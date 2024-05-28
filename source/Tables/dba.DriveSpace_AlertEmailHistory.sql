@@ -9,9 +9,16 @@ CREATE TABLE [dba].[DriveSpace_AlertEmailHistory]
 [SentDate] [datetime] NULL
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dba].[DriveSpace_AlertEmailHistory] ADD CONSTRAINT [PK__DriveSpa__3213E83FF1FD2CB2] PRIMARY KEY CLUSTERED ([id]) ON [PRIMARY]
+ALTER TABLE [dba].[DriveSpace_AlertEmailHistory] ADD CONSTRAINT [PK_DriveSpace_AlertEmailHistory_id] PRIMARY KEY CLUSTERED ([id]) ON [PRIMARY]
 GO
-CREATE NONCLUSTERED INDEX [ix_DriveSpace_AlertEmailHistory_Drive_Letter_SentDate] ON [dba].[DriveSpace_AlertEmailHistory] ([DriveSpace_AlertLog_Id]) INCLUDE ([SentDate]) ON [PRIMARY]
+CREATE NONCLUSTERED INDEX [ix_DriveSpace_AlertEmailHistory_DriveSpace_AlertLog_Id_incl_SentDate] ON [dba].[DriveSpace_AlertEmailHistory] ([DriveSpace_AlertLog_Id]) INCLUDE ([SentDate]) ON [PRIMARY]
 GO
 ALTER TABLE [dba].[DriveSpace_AlertEmailHistory] ADD CONSTRAINT [fk_DriveSpace_AlertLog_Id] FOREIGN KEY ([DriveSpace_AlertLog_Id]) REFERENCES [dba].[DriveSpace_AlertLog] ([id])
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'TABLE', @level1name = N'DriveSpace_AlertEmailHistory';
 GO

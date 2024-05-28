@@ -8,7 +8,14 @@ CREATE TABLE [dba].[DriveSpace_AlertConfig]
 [NotifyOperatorClass] [nvarchar] (350) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dba].[DriveSpace_AlertConfig] ADD CONSTRAINT [PK__DriveSpa__3214EC07E18696E2] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
+ALTER TABLE [dba].[DriveSpace_AlertConfig] ADD CONSTRAINT [PK_DriveSpace_AlertConfig_id] PRIMARY KEY CLUSTERED ([Id]) ON [PRIMARY]
 GO
-ALTER TABLE [dba].[DriveSpace_AlertConfig] ADD CONSTRAINT [UQ__DriveSpa__A89A7DB2FEEDB268] UNIQUE NONCLUSTERED ([ConfigName]) ON [PRIMARY]
+ALTER TABLE [dba].[DriveSpace_AlertConfig] ADD CONSTRAINT [UQ_DriveSpace_AlertConfig_ConfigName] UNIQUE NONCLUSTERED ([ConfigName]) ON [PRIMARY]
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'TABLE', @level1name = N'DriveSpace_AlertConfig';
 GO

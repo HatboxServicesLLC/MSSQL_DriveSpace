@@ -11,8 +11,7 @@ CREATE OR ALTER function [dba].[DriveSpace_FrequencyRange]
 ---------------------------------------*/
 	@Frequency_Value int, 
 	@Frequency_TimePart nvarchar(10),
-	@GivenDate datetime,
-	@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
+	@GivenDate datetime
 
 /*---------------------------------------
 ---------------------------------------*/
@@ -68,4 +67,11 @@ BEGIN
 		END
 	RETURN;
 END
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'FUNCTION', @level1name = N'DriveSpace_FrequencyRange';
 GO

@@ -10,8 +10,7 @@ CREATE OR ALTER FUNCTION [dba].[DriveSpace_EstimateWhenFull]
 --External Variable Declaration
 ---------------------------------------*/
 	@EndDate DATETIME = NULL,
-	@DriveLetters NVARCHAR(500) = null,
-	@Version NVARCHAR(12) = '1.0.0' OUTPUT/*[MAJOR].[MINOR].[BUG]*/
+	@DriveLetters NVARCHAR(500) = null
 /*---------------------------------------
 ---------------------------------------*/
 )
@@ -203,4 +202,11 @@ BEGIN
 		        ON mr.Drive = rc.Drive;
 		RETURN;
 END
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'FUNCTION', @level1name = N'DriveSpace_EstimateWhenFull';
 GO

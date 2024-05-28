@@ -3,7 +3,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
-CREATE VIEW [dba].[vw_DriveSpace_MostRecent]
+CREATE OR ALTER VIEW [dba].[vw_DriveSpace_MostRecent]
 AS 
 SELECT RecentRecord.id,
        RecentRecord.Drive,
@@ -21,7 +21,9 @@ FROM
 WHERE RecentRecord.MostRecent = 1;
 GO
 
+/*VERSION*/
 EXEC sp_addextendedproperty @name = N'VERSION',
     @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
     @level0type = 'SCHEMA', @level0name = N'dba',
-    @level1type = 'TABLE', @level1name = N'vw_DriveSpace_MostRecent';
+    @level1type = 'VIEW', @level1name = N'vw_DriveSpace_MostRecent';
+GO

@@ -27,7 +27,14 @@ CREATE TABLE [dba].[DriveSpace_AlertLog]
 [AlertLog_CreateDate] [datetime] NULL
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dba].[DriveSpace_AlertLog] ADD CONSTRAINT [PK__DriveSpa__3213E83F24C40A22] PRIMARY KEY CLUSTERED ([id]) ON [PRIMARY]
+ALTER TABLE [dba].[DriveSpace_AlertLog] ADD CONSTRAINT [PK_DriveSpace_AlertLog_id] PRIMARY KEY CLUSTERED ([id]) ON [PRIMARY]
 GO
 CREATE NONCLUSTERED INDEX [ix_DriveSpace_AlertLog_Drive_Letter] ON [dba].[DriveSpace_AlertLog] ([Drive_Letter], [AlertConfig_Id]) INCLUDE ([CapturedDateTime], [AlertLog_CreateDate], [FrequencyValue], [FrequencyValue_TimePart]) ON [PRIMARY]
+GO
+
+/*VERSION*/
+EXEC sp_addextendedproperty @name = N'VERSION',
+    @value = '1.0.0.0'/*[MAJOR].[MINOR].[SECURITY].[BUG]*/,
+    @level0type = 'SCHEMA', @level0name = N'dba',
+    @level1type = 'TABLE', @level1name = N'DriveSpace_AlertLog';
 GO
