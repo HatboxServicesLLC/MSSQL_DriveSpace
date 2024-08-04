@@ -1,1 +1,53 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  test-and-deploy:
+    name: Test and Deploy
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Compose (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          docker-compose -f msssql_drivespace/Environments/docker_SqlServerWin-compose.yml up -d
+
+      - name: Set up Docker Compose (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          docker-compose -f msssql_drivespace/Environments/docker_SqlServerLin-compose.yml up -d
+
+      - name: Wait for SQL Server to be ready
+        run: sleep 30 # Wait for SQL Server to initialize
+
+      - name: Run Unit Tests (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          docker-compose -f msssql_drivespace/Environments/docker_SqlServerWin-compose.yml exec -T your_service_name /bin/sh -c "your_unit_test_command"
+
+      - name: Run Unit Tests (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          docker-compose -f msssql_drivespace/Environments/docker_SqlServerLin-compose.yml exec -T your_service_name /bin/sh -c "your_unit_test_command"
+
+      - name: Create Pull Request to Master
+        if: success()
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git checkout -b temp-branch
+          git add .
+          git commit -m "Auto merge dev to master"
+          git push origin temp-branch
+          hub pull-request -b master -h temp-branch -m "Auto merge dev to master"
 
