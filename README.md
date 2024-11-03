@@ -23,8 +23,8 @@ This tool offers database administrators a straightforward way to track availabl
 1. Clone the repository:
    ```shell
    git clone https://github.com/chris904apps/MSSQL_DriveSpace.git
-Run the provided SQL script to set up the necessary tables and stored procedures.
-Configure the SQL Server Agent job (see Usage for details).
+
+Additional Details to come...
 
 ## Usage
 ### Running the Monitoring Script
