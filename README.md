@@ -45,6 +45,7 @@ Additional Details to come...
 
 - Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - Ensure tests cover new or updated functionality.
+- For a list of current workitems see...
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
